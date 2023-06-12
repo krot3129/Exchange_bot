@@ -118,6 +118,16 @@ async def process_target_currency(message: types.Message, state: FSMContext):
 
 @dp.message_handler(Command("calculator"))
 async def start_calculator(message: types.Message, state: FSMContext):
+    """
+       Обработчик команды /calculator. Запускает процесс калькулятора обмена валюты.
+
+       Args:
+           message: Объект types.Message с информацией о сообщении.
+           state: Объект FSMContext для работы с состоянием бота.
+
+       Returns:
+           None
+       """
     logging.info('Команда calculator')
     await message.reply("Выберите базовую валюту:", reply_markup=create_currency_keyboard(supported_currencies))
 
@@ -126,6 +136,16 @@ async def start_calculator(message: types.Message, state: FSMContext):
 
 @dp.message_handler(state='calculator_base_currency')
 async def process_calculator_base_currency(message: types.Message, state: FSMContext):
+    """
+       Обработчик выбора базовой валюты при использовании калькулятора обмена валюты.
+
+       Args:
+           message: Объект types.Message с информацией о сообщении.
+           state: Объект FSMContext для работы с состоянием бота.
+
+       Returns:
+           None
+       """
     await state.update_data(calculator_base_currency=message.text)
 
     await message.reply("Введите количество базовой валюты:")
@@ -135,6 +155,16 @@ async def process_calculator_base_currency(message: types.Message, state: FSMCon
 
 @dp.message_handler(state='calculator_amount')
 async def process_calculator_amount(message: types.Message, state: FSMContext):
+    """
+        Обработчик ввода количества базовой валюты при использовании калькулятора обмена валюты.
+
+        Args:
+            message: Объект types.Message с информацией о сообщении.
+            state: Объект FSMContext для работы с состоянием бота.
+
+        Returns:
+            None
+        """
     data = await state.get_data()
     calculator_base_currency = data['calculator_base_currency']
 
@@ -147,6 +177,16 @@ async def process_calculator_amount(message: types.Message, state: FSMContext):
 
 @dp.message_handler(state='calculator_target_currency')
 async def process_calculator_target_currency(message: types.Message, state: FSMContext):
+    """
+        Обработчик выбора целевой валюты при использовании калькулятора обмена валюты.
+
+        Args:
+            message: Объект types.Message с информацией о сообщении.
+            state: Объект FSMContext для работы с состоянием бота.
+
+        Returns:
+            None
+        """
     data = await state.get_data()
     calculator_base_currency = data['calculator_base_currency']
     calculator_amount = data['calculator_amount']
