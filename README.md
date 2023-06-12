@@ -27,8 +27,7 @@ pip install -r requirements.txt
 ## Запуск бота
 
 1. Склонируйте репозиторий: `git clone https://github.com/krot3129/Exchange_bot.git
-2. Установите зависимости: `pip install -r requirements.txt`
-3. Запустите бота: `python main.py`
+2. Запустите бота: `python main.py`
 
 ## Функции бота
 
