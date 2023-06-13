@@ -165,6 +165,13 @@ async def process_calculator_amount(message: types.Message, state: FSMContext):
         Returns:
             None
         """
+    try:
+        amount = float(message.text)
+        if amount <= 0:
+            raise ValueError("Введите положительное число.")
+    except ValueError:
+        await message.reply("Ошибка! Введите положительное число.")
+
     data = await state.get_data()
     calculator_base_currency = data['calculator_base_currency']
 
