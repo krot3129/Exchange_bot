@@ -168,6 +168,7 @@ async def process_calculator_amount(message: types.Message, state: FSMContext):
     try:
         amount = float(message.text)
         if amount <= 0:
+            logging.error(f'Введено не число {amount}')
             raise ValueError("Введите положительное число.")
     except ValueError:
         await message.reply("Ошибка! Введите положительное число.")
